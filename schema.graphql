@@ -1,0 +1,30 @@
+"""
+Root Query.
+"""
+type Query {
+  pokemon: Pokemon!
+}
+
+interface Node {
+  id: ID!
+}
+
+"""
+Pokémon
+"""
+type Pokemon implements Node {
+  """
+  The ID of an object.
+  """
+  id: ID!
+
+  """
+  The National Pokédex number of this Pokémon.
+  """
+  nationalPokedexNumber: Int!
+
+  """
+  The name of this Pokémon.
+  """
+  name: String!
+}
