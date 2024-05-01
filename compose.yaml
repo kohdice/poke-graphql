@@ -3,7 +3,29 @@ services:
     build:
       context: .
       target: ${TARGET_STAGE:-dev}
+    env_file:
+      - .env
+    environment:
+      TZ: Asia/Tokyo
+    depends_on:
+      - db
     ports:
       - 8080:8080
     volumes:
       - ./:/src
+  db:
+    image: mysql:8.3.0
+    platform: linux/amd64
+    ports:
+      - 33306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: main_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: Asia/Tokyo
+    volumes:
+      - db-store:/var/lib/mysql
+
+volumes:
+  db-store:
