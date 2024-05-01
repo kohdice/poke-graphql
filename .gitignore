@@ -25,3 +25,9 @@ go.work
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Coverage
+coverage.*
+
+# env
+.env
