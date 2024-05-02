@@ -12,10 +12,15 @@ clean:
 
 .PHONY: fmt
 fmt:
+	goimports -w .
 	go fmt ./...
 
 .PHONY: lint
 lint:
+	go vet ./...
+
+.PHONY: ci-lint
+ci-lint:
 	golangci-lint run ./...
 
 .PHONY: test
