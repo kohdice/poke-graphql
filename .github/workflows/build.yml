@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Build
+        env:
+          REPOSITORY: wineat-graphql-api
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $REPOSITORY:$IMAGE_TAG .
