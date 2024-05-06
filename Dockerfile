@@ -20,6 +20,7 @@ RUN --mount=type=cache,target=/var/lib/apt/lists \
 SHELL ["/bin/bash", "-oeux", "pipefail", "-c"]
 
 RUN go install github.com/cosmtrek/air@latest \
+  && go install ariga.io/atlas/cmd/atlas@latest \
   && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.57.2
 
 COPY . .

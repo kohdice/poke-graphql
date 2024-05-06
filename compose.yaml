@@ -8,7 +8,8 @@ services:
     environment:
       TZ: Asia/Tokyo
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - 8080:8080
     volumes:
@@ -24,8 +25,20 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       TZ: Asia/Tokyo
+    healthcheck:
+      test: mysqladmin ping -proot
     volumes:
       - db-store:/var/lib/mysql
+  migrate:
+    image: arigaio/atlas:latest
+    command: >
+      migrate apply
+      --url mysql://root:root@db:3306/main_db?charset=utf8mb4
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./migrations/:/migrations
 
 volumes:
   db-store:
