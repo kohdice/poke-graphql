@@ -35,3 +35,19 @@ coverage:
 .PHONY: tidy
 tidy:
 	go mod tidy
+
+.PHONY: migration
+migration: tidy
+	@echo ""
+	@echo "Running migration..."
+	atlas schema apply --env dev
+
+.PHONY: wait
+wait:
+	@echo "Waiting..." && sleep 20
+
+.PHONY: air
+air: wait migration
+	@echo ""
+	@echo "Running air..."
+	@air -c .air.toml
