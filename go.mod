@@ -2,7 +2,7 @@ module github.com/kohdice/poke-graphql
 
 go 1.22.2
 require (
-	github.com/99designs/gqlgen v0.17.53
+	github.com/99designs/gqlgen v0.17.54
 	github.com/vektah/gqlparser/v2 v2.5.16
 )
 
